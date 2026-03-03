@@ -1,107 +1,31 @@
-# Housing_price_prediction
+# California Housing: Geospatial EDA & Price Prediction
 
-🏡 House Prices Prediction Project
-This project focuses on analyzing and predicting California housing prices using machine learning and data visualization techniques. It involves data cleaning, feature analysis, outlier handling, encoding, modeling, and evaluation.
+## Project Overview
+This project applies Machine Learning to predict median house values across California districts. Using the 1990 Census dataset, I conducted a deep-dive Exploratory Data Analysis (EDA) to find spatial patterns and built a regression model to estimate property costs based on local demographics and geography.
 
-📁 Dataset
-The dataset used is California Housing Dataset, which includes housing data with features like:
+## The Dataset
+The dataset includes 20,640 records with features such as:
+* **Geospatial:** Latitude and Longitude.
+* **Property Specs:** Median house age, total rooms, and total bedrooms.
+* **Demographics:** Population, households, and median income.
+* **Target:** Median House Value (USD).
 
-longitude, latitude – Location coordinates.
+## Tech Stack
+* **Analysis:** Python (Pandas, NumPy)
+* **Visualization:** Matplotlib, Seaborn (Geospatial scatter plots, correlation heatmaps)
+* **Machine Learning:** Scikit-Learn (Pipelines, Standard Scaling, Random Forest Regressor)
 
-housing_median_age, total_rooms, total_bedrooms, population, households, median_income
+## Machine Learning Pipeline
+1. **Data Cleaning:** Handled missing values in `total_bedrooms` and capped outliers.
+2. **Feature Engineering:** Created ratios like `rooms_per_household` and `bedrooms_per_room` to improve model sensitivity.
+3. **Preprocessing:** Applied **One-Hot Encoding** to categorical data (`ocean_proximity`) and **Standard Scaling** to numerical features.
+4. **Model Selection:** Compared Linear Regression and Random Forest Regressors, using **Cross-Validation** to ensure model stability.
 
-median_house_value – The target variable.
+## Key Insights
+* **The Income Factor:** Median income proved to be the strongest predictor of house prices ($r \approx 0.68$).
+* **Location, Location, Location:** Geospatial analysis confirmed a massive price premium for coastal districts compared to inland areas.
+* **Density Metrics:** Derived features (like population per household) revealed that crowded districts often have lower median values despite high total room counts.
 
-ocean_proximity – Categorical column describing proximity to ocean.
-
-📊 Project Workflow
-1. Importing Libraries
-Used:
-
-pandas, numpy for data handling.
-
-matplotlib, seaborn for visualization.
-
-2. Loading the Data
-The dataset is read from a .csv file into a DataFrame.
-
-python
-Copy
-Edit
-df = pd.read_csv("housing.csv")
-3. Initial Data Exploration
-df.info() and df.describe() to understand structure and summary statistics.
-
-df.head() and df.tail() to preview data.
-
-Checked for duplicates and null values.
-
-4. Data Cleaning
-Handled missing values by filling total_bedrooms with the column's mean.
-
-Verified that no nulls remain after imputation.
-
-5. Data Visualization
-Used visual tools to understand distribution and relationships:
-
-Histograms and boxplots for detecting outliers.
-
-Correlation heatmap for numerical relationships.
-
-Bar plots for categorical features like ocean_proximity.
-
-6. Outlier Detection and Removal
-Applied:
-
-IQR method and Z-score to identify outliers.
-
-Winsorization technique to cap extreme values while preserving data integrity.
-
-7. Feature Engineering
-Combined features (e.g. rooms_per_household, bedrooms_per_room) for more insightful predictors.
-
-Converted categorical variables (ocean_proximity) using encoding techniques.
-
-8. Data Scaling
-Standardized features using StandardScaler or normalized depending on model requirements.
-
-Scaling was applied after data split to avoid data leakage.
-
-9. Model Training
-Tested several regression models:
-
-Linear Regression
-
-Decision Tree Regressor
-
-Random Forest Regressor
-
-10. Model Evaluation
-Used metrics like:
-
-Mean Squared Error (MSE)
-
-Root Mean Squared Error (RMSE)
-
-R² Score
-
-Also used train/test split and cross-validation to validate results.
-
-11. Saving the Model (Optional)
-Model can be saved using joblib or pickle for deployment.
-
-📈 Results
-The best model was selected based on performance metrics, giving reliable predictions of median house values across different regions of California.
-
-💡 Future Work
-Apply hyperparameter tuning to improve existing models like XGBoost and CatBoost.
-
-Add model explainability using tools like SHAP or LIME.
-
-Deploy the model as a web app using Flask or Streamlit.
-
-Integrate interactive dashboards (e.g., Plotly, Dash).
-
-Evaluate model performance on live or real-time data if available.
-
-
+## Performance
+* **Primary Metric:** Root Mean Squared Error (RMSE)
+* **Model:** Random Forest Regressor performed best, capturing non-linear relationships that simple linear models missed.
